@@ -172,7 +172,7 @@ struct ast* newIfe (struct ast* firstStmt, struct ast* secStmt, struct ast* tl) 
 }
 
 // create new loop node
-struct ast* newVon (struct ast* from, struct ast* to, struct ast* tl) {
+struct ast* newLoop (struct ast* from, struct ast* to, struct ast* tl) {
   struct loop* tmp = (struct loop*) malloc(sizeof(struct loop));
 
   if (!tmp) {

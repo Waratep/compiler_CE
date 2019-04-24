@@ -20,7 +20,7 @@ extern int errorflag;
 %token<sym> VAR
 %token TK_ASSIGN
 %token TK_NEWLINE
-%token TK_IFE TK_VON CMD_PS CMD_PD CMD_PH
+%token TK_IFE TK_LOOP CMD_PS CMD_PD CMD_PH
 
 %right TK_ASSIGN
 %left '+' '-'
@@ -43,8 +43,8 @@ program:
 
 stmt:
   exp ';' 
-| TK_IFE '(' exp ',' exp ')' '{' block '}'      { $$ = newIfe($3, $5, $8); }
-| TK_VON '(' exp ',' exp ')' '{' block '}'      { $$ = newVon($3, $5, $8); }
+| TK_IFE  '(' exp ',' exp ')' '{' block '}'      { $$ = newIfe($3, $5, $8); }
+| TK_LOOP '(' exp ',' exp ')' '{' block '}'      { $$ = newLoop($3, $5, $8); }
 ;
 
 exp:

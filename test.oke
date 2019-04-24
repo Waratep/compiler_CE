@@ -1,17 +1,12 @@
-_TO => 101d;
-_FM => 2d;
-prints "Prime number from 1 to 100:\n";
+aa => 100d;
+bb => 0d;
+thumsum(bb,aa){
+	sadangD bb;
+	sadangS "\n";
 
-von(_FM, _TO) {
-  _PM => 0d;
-	_ST => 2d;
-	von(_ST, _FM) {
-		ife(0d, _FM % _ST) {
-			_PM => 1d;
-		}
+	thaogun(bb, 50d){
+		sadangS "Hello\n";
 	}
-	ife (_PM, 0d) {
-		printd _FM;
-		prints " ";
-	}
-}
+	
+}	
+

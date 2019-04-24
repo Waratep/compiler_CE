@@ -84,7 +84,7 @@ struct ast* newVar (struct symbol *s);
 struct ast* newAssign (struct symbol *s, struct ast* v);
 struct ast* newNum (int64_t num);
 struct ast* newIfe (struct ast* firstStmt, struct ast* secStmt, struct ast* tl);
-struct ast* newVon (struct ast* from, struct ast* to, struct ast* tl);
+struct ast* newLoop (struct ast* from, struct ast* to, struct ast* tl);
 
 /* evaluate an ast */
 int64_t eval (struct ast* );

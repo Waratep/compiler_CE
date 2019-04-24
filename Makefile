@@ -9,5 +9,5 @@ clean:
 	rm parsing.tab.c lexer.lex.c parsing.tab.h
 
 run:
-	./main test.in
+	./main test.oke
 	gcc test.s -o test -ggdb
