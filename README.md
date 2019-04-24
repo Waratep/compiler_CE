@@ -1,7 +1,9 @@
 # compiler_CE
 
-``` in ubuntu
+``` 
+- in ubuntu to make
 make
 
+- clean
 make clean
 ```
