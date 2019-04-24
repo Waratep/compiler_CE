@@ -21,6 +21,12 @@ from:
 	.string	" "
 .LC6:
 	.string	"\n"
+.LC7:
+	.string	"HHHH\n"
+.LC8:
+	.string	"MMMM\n"
+.LC9:
+	.string	"LLLL\n"
 	.text
 	.globl	main
 	.type	main, @function
@@ -145,6 +151,66 @@ main:
 	pushq	%rcx
 	call	printf
 	popq	%rcx
+	subq	$8, %rsp
+	movq	$2, %rax
+	movq	%rax, (%rsp)
+	movq	-8(%rbp), %rax
+	subq	$8, %rsp
+	movq	%rax, (%rsp)
+	movq	(%rsp), %rax
+	addq	$8, %rsp
+	subq	(%rsp), %rax
+	movq	%rax, (%rsp)
+	cmpq	$0, (%rsp)
+	jne	.L6
+	movl	$.LC7, %esi
+	movl	$.LC2, %edi
+	movl	$0, %eax
+	pushq	%rcx
+	call	printf
+	popq	%rcx
+.L6:
+	addq	$8, %rsp
+	subq	$8, %rsp
+	movq	$2, %rax
+	movq	%rax, (%rsp)
+	movq	-8(%rbp), %rax
+	subq	$8, %rsp
+	movq	%rax, (%rsp)
+	movq	(%rsp), %rax
+	addq	$8, %rsp
+	subq	(%rsp), %rax
+	movq	%rax, (%rsp)
+	cmpq	$0, (%rsp)
+	jne	.L7
+	movl	$.LC8, %esi
+	movl	$.LC2, %edi
+	movl	$0, %eax
+	pushq	%rcx
+	call	printf
+	popq	%rcx
+.L7:
+	addq	$8, %rsp
+	subq	$8, %rsp
+	movq	$2, %rax
+	movq	%rax, (%rsp)
+	movq	-8(%rbp), %rax
+	subq	$8, %rsp
+	movq	%rax, (%rsp)
+	movq	(%rsp), %rax
+	addq	$8, %rsp
+	subq	(%rsp), %rax
+	movq	%rax, (%rsp)
+	cmpq	$0, (%rsp)
+	jne	.L8
+	movl	$.LC9, %esi
+	movl	$.LC2, %edi
+	movl	$0, %eax
+	pushq	%rcx
+	call	printf
+	popq	%rcx
+.L8:
+	addq	$8, %rsp
 	movq	-16(%rbp), %rcx
 	addq	$1, %rcx
 	movq	%rcx, -16(%rbp)

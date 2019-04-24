@@ -171,6 +171,39 @@ struct ast* newIfe (struct ast* firstStmt, struct ast* secStmt, struct ast* tl) 
   return (struct ast*) tmp;
 }
 
+struct ast* newIfl (struct ast* firstStmt, struct ast* secStmt, struct ast* tl) {
+  struct cond *tmp = (struct cond*) malloc(sizeof(struct cond));
+
+  if (!tmp) {
+    yyerror("out of space");
+    exit(0);
+  }
+
+  tmp->nodetype = 'C';
+  tmp->fStmt = firstStmt;
+  tmp->sStmt = secStmt;
+  tmp->tl = tl;
+
+  return (struct ast*) tmp;
+}
+
+struct ast* newIfg (struct ast* firstStmt, struct ast* secStmt, struct ast* tl) {
+  struct cond *tmp = (struct cond*) malloc(sizeof(struct cond));
+
+  if (!tmp) {
+    yyerror("out of space");
+    exit(0);
+  }
+
+  tmp->nodetype = 'C';
+  tmp->fStmt = firstStmt;
+  tmp->sStmt = secStmt;
+  tmp->tl = tl;
+
+  return (struct ast*) tmp;
+}
+
+
 // create new loop node
 struct ast* newLoop (struct ast* from, struct ast* to, struct ast* tl) {
   struct loop* tmp = (struct loop*) malloc(sizeof(struct loop));

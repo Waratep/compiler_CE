@@ -51,11 +51,13 @@ extern int yydebug;
     TK_ASSIGN = 261,
     TK_NEWLINE = 262,
     TK_IFE = 263,
-    TK_LOOP = 264,
-    CMD_PS = 265,
-    CMD_PD = 266,
-    CMD_PH = 267,
-    NEG = 268
+    TK_IFG = 264,
+    TK_IFL = 265,
+    TK_LOOP = 266,
+    CMD_PS = 267,
+    CMD_PD = 268,
+    CMD_PH = 269,
+    NEG = 270
   };
 #endif
 
@@ -71,7 +73,7 @@ union YYSTYPE
     int64_t num;
     char* str;
 
-#line 75 "parsing.tab.h" /* yacc.c:1909  */
+#line 77 "parsing.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

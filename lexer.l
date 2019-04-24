@@ -45,6 +45,8 @@ extern int errorflag;
 "sadangH"          { return (CMD_PH); }
 "sadangD"          { return (CMD_PD); }
 "thaogun"          { return (TK_IFE); }
+"makgua"           { return (TK_IFG);}
+"noigua"           { return (TK_IFL);}
 "thumsum"          { return (TK_LOOP); }
 \n                 {  }
 .                  { errorflag = 1; yyerror("Mystery character %c\n", *yytext); }
