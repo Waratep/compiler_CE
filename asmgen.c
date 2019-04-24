@@ -19,8 +19,6 @@ void closeFile(FILE* fp) {
   FPS("\t.cfi_endproc\n");
   FPS(".LFE0:\n");
   FPS("\t.size main, .-main\n");
-  FPS("\t.ident \"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.6) 5.4.0 20160609\"\n");
-  FPS("\t.section\t.note.GNU-stack,\"\",@progbits\n");
 	
   fclose(fp);
 }

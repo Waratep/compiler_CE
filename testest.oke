@@ -1,0 +1,16 @@
+aa = 0d;
+thumsum(aa,3d){
+	sadangD aa;
+	sadangS " ";
+    bb = 0d;
+	thumsum(bb, 3d){
+		sadangD bb;
+		sadangS " ";
+		cc = 0d;
+		thumsum(cc, 3d){
+            sadangD cc;
+            sadangS " ";
+		}
+	}
+	sadangS "\n";
+}	
