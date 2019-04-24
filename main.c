@@ -179,7 +179,7 @@ struct ast* newIfl (struct ast* firstStmt, struct ast* secStmt, struct ast* tl) 
     exit(0);
   }
 
-  tmp->nodetype = 'C';
+  tmp->nodetype = 'A';
   tmp->fStmt = firstStmt;
   tmp->sStmt = secStmt;
   tmp->tl = tl;
@@ -195,7 +195,23 @@ struct ast* newIfg (struct ast* firstStmt, struct ast* secStmt, struct ast* tl) 
     exit(0);
   }
 
-  tmp->nodetype = 'C';
+  tmp->nodetype = 'M';
+  tmp->fStmt = firstStmt;
+  tmp->sStmt = secStmt;
+  tmp->tl = tl;
+
+  return (struct ast*) tmp;
+}
+
+struct ast* newIfne (struct ast* firstStmt, struct ast* secStmt, struct ast* tl) {
+  struct cond *tmp = (struct cond*) malloc(sizeof(struct cond));
+
+  if (!tmp) {
+    yyerror("out of space");
+    exit(0);
+  }
+
+  tmp->nodetype = 'X';
   tmp->fStmt = firstStmt;
   tmp->sStmt = secStmt;
   tmp->tl = tl;
@@ -262,6 +278,33 @@ void freeNode (struct ast* node) {
 
     // condition node
     case 'C':
+      freeNode(((struct cond*)node)->fStmt);
+      freeNode(((struct cond*)node)->sStmt);
+
+      if (((struct cond*)node)->tl)
+        freeNode(((struct cond*)node)->tl);
+
+      break;
+
+    case 'A':
+      freeNode(((struct cond*)node)->fStmt);
+      freeNode(((struct cond*)node)->sStmt);
+
+      if (((struct cond*)node)->tl)
+        freeNode(((struct cond*)node)->tl);
+
+      break;
+
+    case 'M':
+      freeNode(((struct cond*)node)->fStmt);
+      freeNode(((struct cond*)node)->sStmt);
+
+      if (((struct cond*)node)->tl)
+        freeNode(((struct cond*)node)->tl);
+
+      break;
+      
+    case 'X':
       freeNode(((struct cond*)node)->fStmt);
       freeNode(((struct cond*)node)->sStmt);
 
@@ -511,6 +554,84 @@ void asmGen (struct ast* node) {
       text = genText(text, cmp("$0", "(%rsp)"));
       sprintf(buf, "L%u", condBranchNum);
       text = genText(text, newJump("jne", buf));
+
+      if (((struct cond*)node)->tl)
+          asmGen(((struct cond*)node)->tl);
+
+      sprintf(buf, "L%u", condBranchNum);
+      text = genText(text, newLabel(buf));
+      text = genText(text, add("$8", "%rsp"));
+
+      break;
+
+    case 'A':
+      // need number to assign to label for jumping
+      condBranchNum = branchCount++;
+
+      asmGen(((struct cond*)node)->sStmt);
+      asmGen(((struct cond*)node)->fStmt);
+
+      text = genText(text, movq("(%rsp)", "%rax"));
+      text = genText(text, add("$8", "%rsp"));
+      text = genText(text, sub("(%rsp)", "%rax"));
+      text = genText(text, movq("%rax", "(%rsp)"));
+      
+      
+      text = genText(text, cmp("$0", "(%rsp)"));
+      sprintf(buf, "L%u", condBranchNum);
+      text = genText(text, newJump("jg", buf));
+
+      if (((struct cond*)node)->tl)
+          asmGen(((struct cond*)node)->tl);
+
+      sprintf(buf, "L%u", condBranchNum);
+      text = genText(text, newLabel(buf));
+      text = genText(text, add("$8", "%rsp"));
+
+      break;
+
+    case 'M':
+      // need number to assign to label for jumping
+      condBranchNum = branchCount++;
+
+      asmGen(((struct cond*)node)->sStmt);
+      asmGen(((struct cond*)node)->fStmt);
+
+      text = genText(text, movq("(%rsp)", "%rax"));
+      text = genText(text, add("$8", "%rsp"));
+      text = genText(text, sub("(%rsp)", "%rax"));
+      text = genText(text, movq("%rax", "(%rsp)"));
+      
+      
+      text = genText(text, cmp("$0", "(%rsp)"));
+      sprintf(buf, "L%u", condBranchNum);
+      text = genText(text, newJump("jl", buf));
+
+      if (((struct cond*)node)->tl)
+          asmGen(((struct cond*)node)->tl);
+
+      sprintf(buf, "L%u", condBranchNum);
+      text = genText(text, newLabel(buf));
+      text = genText(text, add("$8", "%rsp"));
+
+      break;
+
+    case 'X':
+      // need number to assign to label for jumping
+      condBranchNum = branchCount++;
+
+      asmGen(((struct cond*)node)->sStmt);
+      asmGen(((struct cond*)node)->fStmt);
+
+      text = genText(text, movq("(%rsp)", "%rax"));
+      text = genText(text, add("$8", "%rsp"));
+      text = genText(text, sub("(%rsp)", "%rax"));
+      text = genText(text, movq("%rax", "(%rsp)"));
+      
+      
+      text = genText(text, cmp("$0", "(%rsp)"));
+      sprintf(buf, "L%u", condBranchNum);
+      text = genText(text, newJump("je", buf));
 
       if (((struct cond*)node)->tl)
           asmGen(((struct cond*)node)->tl);

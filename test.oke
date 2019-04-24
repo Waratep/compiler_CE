@@ -1,26 +1,12 @@
-aa = 0d;
-thumsum(aa,3d){
-	sadangD aa;
-	sadangS " ";
-    bb = 0d;
-	thumsum(bb, 3d){
-		sadangD bb;
-		sadangS " ";
-		cc = 0d;
-		thumsum(cc, 3d){
-            sadangD cc;
-            sadangS " ";
-		}
-	}
-	sadangS "\n";
+	
+aa = 1d;
+bb = 4d;
+cc = 1d;
 
-	thaogun(aa,2d){
-		sadangS "HHHH\n";
-	}
-	makgua(aa,2d){
-		sadangS "MMMM\n";
-	}
-	noigua(aa,2d){
-		sadangS "LLLL\n";
-	}
-}	
+
+makgua(aa,2d){
+	sadangS "MMMM\n";
+}
+noigua(aa,2d){
+	sadangS "LLLL\n";
+}

@@ -45,10 +45,13 @@ extern int errorflag;
 "sadangH"          { return (CMD_PH); }
 "sadangD"          { return (CMD_PD); }
 "thaogun"          { return (TK_IFE); }
+"maithaogun"       { return (TK_IFE); }
 "makgua"           { return (TK_IFG);}
 "noigua"           { return (TK_IFL);}
 "thumsum"          { return (TK_LOOP); }
 \n                 {  }
+"/*"	             { comment(1);}
+"//"	             { comment(2);}
 .                  { errorflag = 1; yyerror("Mystery character %c\n", *yytext); }
 %%
 
@@ -57,5 +60,28 @@ static int64_t strToHex(char* s) {
   s[len-1] = 0;
   return (int64_t)( strtol(s, NULL, 16) );
 }
+
+void comment(int i)
+{
+    int c;
+    while((c = input()) != 0){
+        if(i == 1){
+            if(c == '*'){
+                if((c = input()) == '/')
+                    break;
+                else
+                    unput(c);
+            }
+        }else if(i == 2){
+            if(c != 0){
+                if((c = input()) == '\n')
+                    break;
+                else
+                    unput(c);
+            }
+        }
+    }
+}
+
 
 
