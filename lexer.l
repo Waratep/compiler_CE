@@ -28,7 +28,7 @@ extern int errorflag;
 [0-9a-fA-F]+[hH]  { yylval.num = strToHex(yytext); return (NUM);}
 {L}({L}|{D})      { yylval.sym = lookup(yytext); return (VAR); }
 ["].*["]          { yylval.str = strdup(yytext); return (TEXT); }
-"=>"              { return (TK_ASSIGN); }
+"="               { return (TK_ASSIGN); }
 "(" |
 ")" |
 "{" |

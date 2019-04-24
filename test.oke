@@ -1,5 +1,5 @@
-aa => 100d;
-bb => 0d;
+aa = 100d;
+bb = 0d;
 thumsum(bb,aa){
 	sadangD bb;
 	sadangS "\n";
