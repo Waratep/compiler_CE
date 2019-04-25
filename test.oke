@@ -3,6 +3,7 @@ aa = 1d;
 bb = 4d;
 cc = 1d;
 
+dd[9];
 
 makgua(aa,2d){
 	sadangS "MMMM\n";

@@ -2,8 +2,8 @@ D			[0-9]
 L			[a-zA-Z_]
 H			[a-fA-F0-9]
 E			[Ee][+-]?{D}+
-FS			(f|F|l|L)
-IS			(u|U|l|L)*
+FS	  (f|F|l|L)
+IS		(u|U|l|L)*
 
 
 %option noyywrap nodefault yylineno
@@ -23,12 +23,12 @@ extern int errorflag;
 
 %%
 
-[ \t]             {  }
-[0-9]+d           { yylval.num = (int64_t)atoi(yytext); return (NUM); }
-[0-9a-fA-F]+[hH]  { yylval.num = strToHex(yytext); return (NUM);}
-{L}({L}|{D})      { yylval.sym = lookup(yytext); return (VAR); }
-["].*["]          { yylval.str = strdup(yytext); return (TEXT); }
-"="               { return (TK_ASSIGN); }
+[ \t]              {  }
+[0-9]+d            { yylval.num = (int64_t)atoi(yytext); return (NUM); }
+[0-9a-fA-F]+[hH]   { yylval.num = strToHex(yytext); return (NUM);}
+{L}({L}|{D})       { yylval.sym = lookup(yytext); return (VAR); }
+["].*["]           { yylval.str = strdup(yytext); return (TEXT); }
+"="                { return (TK_ASSIGN); }
 "(" |
 ")" |
 "{" |
