@@ -1,13 +1,22 @@
 	
 aa = 1d;
-bb = 4d;
-cc = 1d;
+b = 4d;
+c = 2d;
 
-dd[9];
-
-makgua(aa,2d){
-	sadangS "MMMM\n";
+makgua(aa,b){
+	makgua(aa,c){
+		sadangS "aa is Max\n";
+	}
 }
-noigua(aa,2d){
-	sadangS "LLLL\n";
+
+makgua(b,aa){
+	makgua(b,c){
+		sadangS "b is Max\n";
+	}
+}
+
+makgua(c,aa){
+	makgua(c,b){
+		sadangS "c is Max\n";
+	}
 }

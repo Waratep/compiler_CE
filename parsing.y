@@ -54,6 +54,8 @@ exp:
   term
 | VAR TK_ASSIGN exp         { $$ = newAssign($1, $3); }
 | VAR '[' NUM ']'           { $$ = newAssign($1, $3); }
+| VAR '[' NUM ']' TK_ASSIGN NUM   { $$ = newAssign($1, $3); }
+
 | exp '+' exp               { $$ = newNode($1, $3, '+'); }
 | exp '-' exp               { $$ = newNode($1, $3, '-'); }
 | exp '*' exp               { $$ = newNode($1, $3, '*'); }

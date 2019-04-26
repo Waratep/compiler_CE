@@ -24,9 +24,9 @@ extern int errorflag;
 %%
 
 [ \t]              {  }
-[0-9]+d            { yylval.num = (int64_t)atoi(yytext); return (NUM); }
+[0-9]+[dD]         { yylval.num = (int64_t)atoi(yytext); return (NUM); }
 [0-9a-fA-F]+[hH]   { yylval.num = strToHex(yytext); return (NUM);}
-{L}({L}|{D})       { yylval.sym = lookup(yytext); return (VAR); }
+({L})|({L}{L})     { yylval.sym = lookup(yytext); return (VAR); }
 ["].*["]           { yylval.str = strdup(yytext); return (TEXT); }
 "="                { return (TK_ASSIGN); }
 "(" |
